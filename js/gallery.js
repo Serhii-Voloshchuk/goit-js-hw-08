@@ -67,7 +67,7 @@ const images = [
 const gallery = document.querySelector('.gallery');
 
 images.forEach((image) => {
-   gallery.innerHTML += `<li>
+    gallery.innerHTML += `<li>
     <a class='gallery-link' href='${image.original}'>
     <img
     style='width:360px'
@@ -75,22 +75,21 @@ images.forEach((image) => {
     src='${image.preview}'
     data-source='${image.original}'
     alt='${image.description}'
-    /></a>
+    />
+    </a>
     </li>`
 });
 
-const galleryImage = document.querySelector('gallery-image');
 
-galleryImage.addEventListener('click', getOriginalImg );
-function getOriginalImg(){
-console.log(image.original);
-}
-
-
- image.addEventListener('click', event =>{
+gallery.addEventListener('click', (event) => {
     event.preventDefault();
-    });
-    
+    console.log(event.target.dataset.source);
+
+    const modalContent = `<img src="${event.target.dataset.source}" alt="${event.target.alt}"/>`;
+    const instance = basicLightbox.create(modalContent);
+
+    instance.show();
+});
 
 
 
@@ -98,30 +97,8 @@ console.log(image.original);
 
 
 
-// const gallery = document.querySelector('.gallery');
 
-// const createGalleryItem = ({preview, original, description}) =>{
 
-// const item = document.createElement('li');
-// item.classList.add('gallery-item');
 
-// const linkImage = document.createElement('a');
-// linkImage.classList.add('gallery-link');
-// linkImage.href = original;
-// linkImage.addEventListener('click', event =>{
-// event.preventDefault();
-// });
 
-// const image = document.createElement('img');
-// image.classList.add('gallery-image');
-// image.src = preview;
-// image.alt = description;
-// image.dataset.source = original;
 
-// linkImage.appendChild(image);
-// item.appendChild(linkImage);
-// gallery.appendChild(item);
-
-// };
-
-// images.forEach(createGalleryItem);
