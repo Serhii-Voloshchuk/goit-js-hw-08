@@ -66,62 +66,38 @@ const images = [
     
 const gallery = document.querySelector('.gallery');
 
+
 images.forEach((image) => {
-   gallery.innerHTML += `<li>
-    <a class='gallery-link' href='${image.original}'>
-    <img
-    style='width:360px'
-    class='gallery-image'
-    src='${image.preview}'
-    data-source='${image.original}'
-    alt='${image.description}'
-    /></a>
-    </li>`
+const listItem = document.createElement('li');
+
+const link = document.createElement('a');
+link.classList.add('gallery-link');
+link.htef = image.original;
+
+const img = document.createElement('img');
+img.style.width = '360px';
+img.classList.add('gallery-image');
+img.src = image.preview;
+img.dataset.source = image.original;
+img.alt = image.description;
+
+link.appendChild(img);
+listItem.appendChild(link);
+gallery.appendChild(listItem);
+
 });
 
-const galleryImage = document.querySelector('gallery-image');
 
-galleryImage.addEventListener('click', getOriginalImg );
-function getOriginalImg(){
-console.log(image.original);
-}
-
-
- image.addEventListener('click', event =>{
+gallery.addEventListener('click', (event) => {
     event.preventDefault();
-    });
+    if(event.target.classList.contains('gallery-image')){
+        console.log(event.target.dataset.source);
+    };
+    
+    const modalContent = `<img src="${event.target.dataset.source}" alt="${event.target.alt}"/>`;
+    const instance = basicLightbox.create(modalContent);
+
+    instance.show();
+});
     
 
-
-
-
-
-
-
-// const gallery = document.querySelector('.gallery');
-
-// const createGalleryItem = ({preview, original, description}) =>{
-
-// const item = document.createElement('li');
-// item.classList.add('gallery-item');
-
-// const linkImage = document.createElement('a');
-// linkImage.classList.add('gallery-link');
-// linkImage.href = original;
-// linkImage.addEventListener('click', event =>{
-// event.preventDefault();
-// });
-
-// const image = document.createElement('img');
-// image.classList.add('gallery-image');
-// image.src = preview;
-// image.alt = description;
-// image.dataset.source = original;
-
-// linkImage.appendChild(image);
-// item.appendChild(linkImage);
-// gallery.appendChild(item);
-
-// };
-
-// images.forEach(createGalleryItem);
