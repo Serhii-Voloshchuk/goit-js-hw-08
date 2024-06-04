@@ -65,9 +65,10 @@ const images = [
     ];
     
 const gallery = document.querySelector('.gallery');
-
+const fragments = document.createDocumentFragment();
 
 images.forEach((image) => {
+
 const listItem = document.createElement('li');
 
 const link = document.createElement('a');
@@ -83,10 +84,11 @@ img.alt = image.description;
 
 link.appendChild(img);
 listItem.appendChild(link);
-gallery.appendChild(listItem);
+fragments.appendChild(listItem);
 
 });
 
+gallery.appendChild(fragments);
 
 gallery.addEventListener('click', (event) => {
     event.preventDefault();
