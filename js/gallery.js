@@ -72,7 +72,7 @@ const listItem = document.createElement('li');
 
 const link = document.createElement('a');
 link.classList.add('gallery-link');
-link.htef = image.original;
+link.href = image.original;
 
 const img = document.createElement('img');
 img.style.width = '360px';
@@ -90,8 +90,8 @@ gallery.appendChild(listItem);
 
 gallery.addEventListener('click', (event) => {
     event.preventDefault();
-    if(event.target.classList.contains('gallery-image')){
-        console.log(event.target.dataset.source);
+    if(event.target.nodeName !== 'IMG'){
+        return;
     };
     
     const modalContent = `<img src="${event.target.dataset.source}" alt="${event.target.alt}"/>`;
